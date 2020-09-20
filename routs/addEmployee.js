@@ -35,6 +35,52 @@ router.post("/deleteemployee/", (req, res) => {
     })
 })
 
+// router.post('/update/dietaryRequirement', (req, res) => {
+//     const { _id, dietaryValue } = req.body
+//     console.log(dietaryValue, '_________________dietaryValue_______________')
+//     DietaryRequirement.update({ "_id": _id }, { "$set": { dietaryValue } })
+//         .then((update) => {
+//             //send response users
+//             console.log('_________________then_______________')
+//             res.json(update)
+
+//         })
+//         //catch the error
+//         .catch((err) => {
+//             console.log(err, '_________________catch_______________')
+//             res.send(err)
+//         }
+//         );
+
+// });
+router.post("/updateEmployee/", (req, res) => {
+    const { localDbKey, name, phone, address, cnic } = req.body
+
+    Employee.update({ "localDbKey": localDbKey }, { "$set": { name, phone, address, cnic } })
+        .then((update) => {
+            //send response users
+            console.log('_________________then_______________')
+            res.status(200).json({ message: "Employee has successfully been updated!" })
+
+        })
+        //catch the error
+        .catch((err) => {
+            console.log(err, '_________________catch_______________')
+            res.status(500).json({ error: err })
+        }
+        );
+
+
+    // Employee.deleteOne({ localDbKey: localDbKey }, {
+    // }, function (err, result) {
+    //     // if (err) {
+    //     //     res.status(500).json({ error: err })
+    //     // } else {
+    //     //     res.status(200).json({ message: "Employee has successfully been updated!" })
+    //     // }
+    // })
+})
+
 // router.get("/", (req, res) => {
 //     Employee.find()
 //         .then(result => {
