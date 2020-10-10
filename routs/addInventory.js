@@ -44,6 +44,7 @@ router.get('/getInventory', (req, res) => {
 })
 
 
+
 //@delete inventory
 router.post("/deleteInventory/", (req, res) => {
     const { localDbKey } = req.body
