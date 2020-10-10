@@ -22,6 +22,19 @@ router.post("/addEmployeeLoan/", (req, res) => {
         })
 });
 
+router.get('/getEmployeeLoan', (req, res) => {
+
+    EmployeeLoan.find()
+        .exec()
+        .then(result => {
+            res.json(result)
+        }).catch(err => {
+            console.log("error", err)
+            res.status(500).json({ error: err, message: err })
+        })
+
+})
+
 // //@delete employee
 router.post("/deleteEmployeeLoan/", (req, res) => {
     const { localDbKey } = req.body
@@ -38,10 +51,10 @@ router.post("/deleteEmployeeLoan/", (req, res) => {
 
 router.post("/updateEmployeeLoan/", (req, res) => {
     const { localDbKey, name, cnic, amount, date } = req.body
+    console.log(localDbKey, '_________________then_______________')
     EmployeeLoan.update({ "localDbKey": localDbKey }, { "$set": { name, cnic, amount, date } })
         .then((update) => {
             //send response users
-            console.log('_________________then_______________')
             res.status(200).json({ message: "Employee has successfully been updated!" })
 
         })

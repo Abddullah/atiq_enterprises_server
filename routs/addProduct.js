@@ -2,6 +2,20 @@ const express = require('express')
 const router = express.Router()
 const Product = require('../modals/addProductModal')
 
+router.get('/getProduct', (req, res) => {
+
+    Product.find()
+        .exec()
+        .then(result => {
+            res.json(result)
+        }).catch(err => {
+            console.log("error", err)
+            res.status(500).json({ error: err, message: err })
+        })
+
+})
+
+
 router.post("/addProduct/", (req, res) => {
     const { dateAndTime, productName, productSellingRate, productBuyingRate, localDbKey } = req.body
     console.log(dateAndTime, productName, productSellingRate, productBuyingRate, localDbKey, ">>>>>>>>>======================== Body Add product ========================>>>>>>>>>")

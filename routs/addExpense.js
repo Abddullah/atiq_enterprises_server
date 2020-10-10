@@ -21,6 +21,19 @@ router.post("/addExpense/", (req, res) => {
         })
 });
 
+router.get('/getExpense', (req, res) => {
+
+    Expense.find()
+        .exec()
+        .then(result => {
+            res.json(result)
+        }).catch(err => {
+            console.log("error", err)
+            res.status(500).json({ error: err, message: err })
+        })
+
+})
+
 // // //@delete expense
 router.post("/deleteExpense/", (req, res) => {
     const { localDbKey } = req.body

@@ -22,6 +22,19 @@ router.post("/addEmployee/", (req, res) => {
         })
 });
 
+router.get('/getEmployee', (req, res) => {
+
+    Employee.find()
+        .exec()
+        .then(result => {
+            res.json(result)
+        }).catch(err => {
+            console.log("error", err)
+            res.status(500).json({ error: err, message: err })
+        })
+
+})
+
 // //@delete employee
 router.post("/deleteemployee/", (req, res) => {
     const { localDbKey } = req.body

@@ -30,6 +30,21 @@ router.post("/addInventory/", (req, res) => {
         })
 });
 
+router.get('/getInventory', (req, res) => {
+
+    Inventory.find()
+        .exec()
+        .then(result => {
+            res.json(result)
+        }).catch(err => {
+            console.log("error", err)
+            res.status(500).json({ error: err, message: err })
+        })
+
+})
+
+
+
 //@delete inventory
 router.post("/deleteInventory/", (req, res) => {
     const { localDbKey } = req.body
